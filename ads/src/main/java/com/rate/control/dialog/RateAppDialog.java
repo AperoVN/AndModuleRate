@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.rate.control.R;
 import com.rate.control.funtion.AppUtils;
-import com.rate.control.funtion.SharedPreferencesHelper;
+import com.rate.control.funtion.RatingPreferencesHelper;
 import com.ymb.ratingbar_lib.RatingBar;
 
 
@@ -63,7 +63,7 @@ public class RateAppDialog extends Dialog {
                     public void run() {
                         try {
                             Thread.sleep(500);
-                            SharedPreferencesHelper.setRated(mContext, true);
+                            RatingPreferencesHelper.setRated(mContext, true);
                             if (v < 4.0) {
                                 findViewById(R.id.ln_feedback).post(new Runnable() {
                                     @Override
