@@ -105,6 +105,7 @@
             android:visibility="gone">
 
             <EditText
+                android:id="@+id/edt_content"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
                 android:layout_gravity="center"

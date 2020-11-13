@@ -1,28 +1,32 @@
 package com.rate.control.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
+import android.widget.EditText;
 
+import com.rate.control.OnCallback;
 import com.rate.control.R;
-import com.rate.control.funtion.AppUtils;
-import com.rate.control.funtion.RatingPreferencesHelper;
 import com.ymb.ratingbar_lib.RatingBar;
 
 
 public class RateAppDialog extends Dialog {
-    Context mContext;
-    private Thread th;
+    private Handler handler;
+    private OnCallback callback;
+    private EditText edtContent;
+    private Runnable rd;
+
+    public void setCallback(OnCallback callback) {
+        this.callback = callback;
+    }
 
     public RateAppDialog(Context context) {
         super(context);
-        mContext = context;
     }
 
     @Override
@@ -31,58 +35,52 @@ public class RateAppDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setContentView(R.layout.dialog_rate);
+    }
+
+    @Override
+    public void show() {
+        super.show();
         initView();
     }
 
     private void initView() {
         setCancelable(false);
         RatingBar rating = findViewById(R.id.rating);
+        edtContent = findViewById(R.id.edt_content);
         findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Thank for your feedback!", Toast.LENGTH_SHORT).show();
                 dismiss();
-                ((Activity) mContext).finish();
+                callback.onSubmit(edtContent.getText().toString());
             }
         });
         findViewById(R.id.ln_later).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
-                ((Activity) mContext).finish();
+                callback.onMaybeLater();
             }
         });
         rating.setOnRatingChangedListener(new RatingBar.OnRatingChangedListener() {
             @Override
             public void onRatingChange(final float v, float v1) {
-                if (th != null) {
-                    th.interrupt();
+                if (handler != null && rd != null) {
+                    handler.removeCallbacks(rd);
                 }
-                th = new Thread(new Runnable() {
+                handler = new Handler();
+                rd = new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            Thread.sleep(500);
-                            RatingPreferencesHelper.setRated(mContext, true);
                             if (v < 4.0) {
-                                findViewById(R.id.ln_feedback).post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        findViewById(R.id.ln_feedback).setVisibility(View.VISIBLE);
-                                        findViewById(R.id.ln_later).setVisibility(View.GONE);
-                                    }
-                                });
+                                findViewById(R.id.ln_feedback).setVisibility(View.VISIBLE);
+                                findViewById(R.id.ln_later).setVisibility(View.GONE);
                                 return;
                             }
-                            AppUtils.rateApp(mContext);
                             dismiss();
-                            ((Activity) mContext).finish();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            callback.onRate();
                     }
-                });
-                th.start();
+                };
+                handler.postDelayed(rd,500);
             }
         });
 
