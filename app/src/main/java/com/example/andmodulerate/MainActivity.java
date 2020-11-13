@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        RateUtils.showRateDialog(this, new OnCallback() {
+        RateUtils.showRateBlueDialog(this, new OnCallback() {
             @Override
             public void onMaybeLater() {
                 finish();

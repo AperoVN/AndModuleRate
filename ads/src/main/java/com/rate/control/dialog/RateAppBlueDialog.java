@@ -15,7 +15,7 @@ import com.rate.control.R;
 import com.ymb.ratingbar_lib.RatingBar;
 
 
-public class RateAppDialog extends Dialog {
+public class RateAppBlueDialog extends Dialog {
     private Handler handler;
     private OnCallback callback;
     private EditText edtContent;
@@ -25,7 +25,7 @@ public class RateAppDialog extends Dialog {
         this.callback = callback;
     }
 
-    public RateAppDialog(Context context) {
+    public RateAppBlueDialog(Context context) {
         super(context);
     }
 
@@ -34,7 +34,7 @@ public class RateAppDialog extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        setContentView(R.layout.dialog_rate);
+        setContentView(R.layout.dialog_rate_blue);
     }
 
     @Override
