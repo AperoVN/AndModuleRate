@@ -80,7 +80,7 @@ public class RateAppDialog extends Dialog {
                             callback.onRate();
                     }
                 };
-                handler.postDelayed(rd,500);
+                handler.postDelayed(rd,200);
             }
         });
 
