@@ -16,7 +16,6 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -30,7 +29,6 @@
             android:typeface="serif" />
 
         <TextView
-            style="@style/TextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -73,7 +71,6 @@
 
             <TextView
                 android:gravity="center"
-                style="@style/TextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

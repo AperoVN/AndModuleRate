@@ -6,10 +6,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="TextViewStyle">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
     <style name="DialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
