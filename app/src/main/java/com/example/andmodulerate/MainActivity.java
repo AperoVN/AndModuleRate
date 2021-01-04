@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        RateUtils.showRateBlueDialog(this, new OnCallback() {
+        RateUtils.showRate2Dialog(this, new OnCallback() {
             @Override
             public void onMaybeLater() {
                 finish();
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             public void onSubmit(String review) {
                 Toast.makeText(MainActivity.this, review, Toast.LENGTH_SHORT).show();
                 finish();
-
             }
 
             @Override

@@ -15,31 +15,31 @@
         android:background="@drawable/btn_scan"
         android:orientation="vertical">
 
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="DO YOU LIKE OUR APP?"
-            android:textColor="#425268"
-            android:textSize="@dimen/_14sdp"
-            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:maxLines="2"
+            android:text="We are working hard for a better user experience"
+            android:textColor="#8D8D8D"
+            android:textSize="@dimen/_12sdp"
             android:typeface="serif" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginLeft="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_50sdp"
-            android:gravity="center"
+            android:layout_marginRight="@dimen/_16sdp"
             android:maxLines="2"
-            android:text="Give us a quick rating so we know if you like it?"
-            android:textColor="#AEB9C4"
-            android:textSize="@dimen/_10sdp"
+            android:text="We appreciate you if you can rate us"
+            android:textColor="#8D8D8D"
+            android:textSize="@dimen/_12sdp"
             android:typeface="serif" />
 
 
@@ -49,45 +49,57 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_16sdp"
-            app:drawable_empty="@drawable/ic_star_inactive"
-            app:drawable_filled="@drawable/ic_star_active"
-            app:drawable_half="@drawable/ic_star_inactive"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:drawable_empty="@drawable/ic_star2_inactive"
+            app:drawable_filled="@drawable/ic_star2_active"
+            app:drawable_half="@drawable/ic_star2_inactive"
             app:drawable_margin="@dimen/_16sdp"
             app:drawable_size="@dimen/_30sdp"
             app:is_indicator="false"
             app:max_count="5"
             app:rating="0" />
 
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:src="@drawable/ic_hand" />
+
         <LinearLayout
             android:id="@+id/ln_later"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_50sdp"
-            android:orientation="vertical">
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:orientation="horizontal">
 
             <TextView
-                android:gravity="center"
+                android:id="@+id/tv_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:maxLines="2"
-                android:text="Maybe later"
+                android:text="Cancel"
                 android:textColor="#425268"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_14sdp"
                 android:typeface="serif" />
 
             <TextView
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="1dp"
+                android:id="@+id/tv_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_16sdp"
-                android:background="#000"
-                android:gravity="center" />
+                android:layout_marginLeft="@dimen/_24sdp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="Rate"
+                android:textColor="#FF7F0A"
+                android:textSize="@dimen/_16sdp"
+                android:typeface="serif" />
 
         </LinearLayout>
 
@@ -124,6 +136,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/bg_submit"
+                android:backgroundTint="#FF7F0A"
                 android:gravity="center"
                 android:text="Submit"
                 android:textColor="#FFF"
@@ -132,10 +145,5 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/header"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_heart" />
+
 </RelativeLayout>
