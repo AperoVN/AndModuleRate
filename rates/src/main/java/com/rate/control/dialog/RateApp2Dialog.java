@@ -87,7 +87,7 @@ public class RateApp2Dialog extends Dialog {
             private void addEventRate() {
                 rating.setOnRatingChangedListener(new RatingBar.OnRatingChangedListener() {
                     @Override
-                    public void onRatingChange(final float v, float v1) {
+                    public void onRatingChange(final float v, final float v1) {
                         if (handler != null && rd != null) {
                             handler.removeCallbacks(rd);
                         }
@@ -95,7 +95,7 @@ public class RateApp2Dialog extends Dialog {
                         rd = new Runnable() {
                             @Override
                             public void run() {
-                                if (v < 4.0) {
+                                if (v1 < 4.0) {
                                     findViewById(R.id.ln_feedback).setVisibility(View.VISIBLE);
                                     findViewById(R.id.ln_later).setVisibility(View.GONE);
                                     return;
