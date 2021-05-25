@@ -27,7 +27,7 @@ public class CustomRateAppDialog extends Dialog {
     EditText edtFeedback;
     TextView tv_submit;
     private TextView btnTooAds, btnNotWorking, btnOther;
-    private LinearLayout layoutFeedback;
+    private LinearLayout layoutFeedback, layoutActions;
     float ratting = 1f;
     private String feedback = "";
 
@@ -55,6 +55,7 @@ public class CustomRateAppDialog extends Dialog {
         btnNotWorking = findViewById(R.id.btn_not_working);
         btnOther = findViewById(R.id.btn_other);
         layoutFeedback = findViewById(R.id.layout_feedback);
+        layoutActions = findViewById(R.id.layout_actions);
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +84,11 @@ public class CustomRateAppDialog extends Dialog {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(300);
                             Log.e("Ratingbar", "v:" + v);
                             if (v1 == 0.0f)
                                 return;
-                            if (v1 < 4.0) {
+                            if (v1 <= 4.0) {
                                 layoutFeedback.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -95,18 +96,21 @@ public class CustomRateAppDialog extends Dialog {
                                         layoutFeedback.setVisibility(View.VISIBLE);
                                     }
                                 });
-                                ratting = v1;
-                                return;
-                            }
-                            if (v1 == 4) {
-                                layoutFeedback.post(new Runnable() {
+                                layoutActions.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        layoutFeedback.setVisibility(View.GONE);
+                                        layoutActions.setVisibility(v1 == 4 ? View.GONE : View.VISIBLE);
                                     }
                                 });
-                                callbackListener.onRating(4, "User rated 4*");
-                                dismiss();
+                                if (v1 == 4) {
+                                    edtFeedback.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            edtFeedback.setVisibility(View.VISIBLE);
+                                        }
+                                    });
+                                }
+                                ratting = v1;
                                 return;
                             }
                             dismiss();
