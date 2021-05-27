@@ -7,7 +7,7 @@
     tools:ignore="ExtraText">
 
     <LinearLayout
-        android:layout_width="@dimen/_300sdp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_25sdp"
@@ -94,7 +94,7 @@
 
         <LinearLayout
             android:id="@+id/ln_feedback"
-            android:layout_width="@dimen/_300sdp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_16sdp"
@@ -104,10 +104,11 @@
             <EditText
                 android:id="@+id/edt_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="wrap_content"
+                android:lines="5"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_35sdp"
-                android:layout_marginRight="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_24sdp"
                 android:background="@drawable/bg_edit_feedback"
                 android:gravity="top"
                 android:hint="Please leave a feedback to help us improve product"
