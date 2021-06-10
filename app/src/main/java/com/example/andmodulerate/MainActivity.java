@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
-        RateUtils.showCustomRateDialog(this, new CallbackListener() {
+        RateUtils.showRateDialogWithReason(this, new CallbackListener() {
             @Override
             public void onMaybeLater() {
                 finish();
