@@ -12,6 +12,7 @@ import com.rate.control.dialog.CustomRateAppDialog;
 import com.rate.control.dialog.RateApp2Dialog;
 import com.rate.control.dialog.RateAppBlueDialog;
 import com.rate.control.dialog.RateAppDialog;
+import com.rate.control.dialog.RateAppEmojiDialog;
 import com.rate.control.dialog.RateAppWithReason;
 
 
@@ -49,6 +50,15 @@ public class RateUtils {
     public static void showRateDialogWithReason(Context context, CallbackListener callbackListener) {
         RateAppWithReason dialog = new RateAppWithReason(context, callbackListener);
         int w = (int) (context.getResources().getDisplayMetrics().widthPixels * 0.9);
+        int h = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setLayout(w, h);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
+        dialog.show();
+    }
+
+    public static void showRateEmojiDialog(Context context, CallbackListener callbackListener) {
+        RateAppEmojiDialog dialog = new RateAppEmojiDialog(context, callbackListener);
+        int w = context.getResources().getDisplayMetrics().widthPixels;
         int h = ViewGroup.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setLayout(w, h);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;

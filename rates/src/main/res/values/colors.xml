@@ -9,4 +9,5 @@
     <color name="colorSelected">#FF5582</color>
     <color name="colorText">#425268</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorRed">#f00000</color>
 </resources>

@@ -10,4 +10,12 @@
     <string name="later">Maybe later</string>
     <string name="thanks_rating">Thank you for rating</string>
     <string name="thanks_feedback">Thank for your feedback!</string>
+    <string name="hint_feedback">Please leave a feedback to help us improve product</string>
+    <string name="rate">Rate</string>
+    <string name="title_oh_no">Oh, no!</string>
+    <string name="content_give_feedback">Please give us some feedback</string>
+    <string name="title_like_you">We like you too!</string>
+    <string name="title_thank_feedback">Thanks for your feedback</string>
+    <string name="content_rate">We are working hard for a better user experience. We’d greatly appreciate if you can rate us.</string>
+    <string name="txt_the_best_we_can_get">The best we can get :)</string>
 </resources>
