@@ -1,8 +1,6 @@
 package com.rate.control.funtion;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.ViewGroup;
 
 import com.rate.control.CallbackListener;
@@ -58,11 +56,11 @@ public class RateUtils {
 
     public static void showRateEmojiDialog(Context context, CallbackListener callbackListener) {
         RateAppEmojiDialog dialog = new RateAppEmojiDialog(context, callbackListener);
-        int w = context.getResources().getDisplayMetrics().widthPixels;
+        dialog.show();
+        int w = (int) (context.getResources().getDisplayMetrics().widthPixels * 0.9);
         int h = ViewGroup.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setLayout(w, h);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
-        dialog.show();
     }
 }
 
