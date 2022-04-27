@@ -120,7 +120,7 @@
                 android:layout_marginHorizontal="@dimen/_24sdp"
                 android:layout_marginVertical="@dimen/_20sdp"
                 android:background="@drawable/bg_submit"
-                android:backgroundTint="@color/colorRed"
+                android:backgroundTint="@color/white_blur"
                 android:gravity="center"
                 android:padding="@dimen/_12sdp"
                 android:text="@string/rate"
@@ -136,6 +136,6 @@
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_rate_close"
         tools:ignore="ContentDescription" />
 </RelativeLayout>
