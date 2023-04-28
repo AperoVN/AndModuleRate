@@ -18,4 +18,18 @@
     <string name="title_thank_feedback">Thanks for your feedback</string>
     <string name="content_rate">We are working hard for a better user experience. We’d greatly appreciate if you can rate us.</string>
     <string name="txt_the_best_we_can_get">The best we can get :)</string>
+
+    <string name="rating_invitation">We are working hard for a better user experience. We’d greatly appreciate if you can rate us.</string>
+    <string name="please_feedback">Please give us some feedback</string>
+    <string name="rate_thanks_feedback">Thanks for your feedback</string>
+    <string name="we_like_you_too">We like you too!</string>
+    <string name="oh_no">Oh, no!</string>
+    <string name="the_best_we_can_get">The best we can get :)</string>
+    <string name="rate_us">Rate us</string>
+    <string name="gmail_package">com.google.android.gm</string>
+    <string name="mail_fixback_rated">publishing.apero@gmail.com</string>
+    <string name="subject_mail_fixback_rate">"[%1$s] Feedback</string>
+    <string name="content_mail_fixback_rate">"i. %1$s \nii. Rate star (eg: %2$s/5) \niii. Feedback text"</string>
+    <string name="rate_start_event">rate_star_%1$s</string>
+    <string name="cancel">Cancel</string>
 </resources>

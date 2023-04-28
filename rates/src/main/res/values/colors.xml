@@ -10,4 +10,10 @@
     <color name="colorText">#425268</color>
     <color name="colorWhite">#fff</color>
     <color name="colorRed">#f00000</color>
+
+    <color name="blue_bolt">#FF00B2FF</color>
+    <color name="davy_grey">#FF555555</color>
+    <color name="raisin_black">#FF222222</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
 </resources>
