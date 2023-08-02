@@ -32,4 +32,10 @@
     <string name="content_mail_fixback_rate">"i. %1$s \nii. Rate star (eg: %2$s/5) \niii. Feedback text"</string>
     <string name="rate_start_event">rate_star_%1$s</string>
     <string name="cancel">Cancel</string>
+
+    <string name="content_rate_1s">We value your feedback.</string>
+    <string name="content_rate_2s">We\'ll improve your experience</string>
+    <string name="content_rate_3s">We\'re committed to making it even better.</string>
+    <string name="content_rate_4s">We\'re delighted that you enjoy using our app</string>
+    <string name="content_rate_5s">We are thrilled to hear that you love our app.</string>
 </resources>
