@@ -38,4 +38,6 @@
     <string name="content_rate_3s">We\'re committed to making it even better.</string>
     <string name="content_rate_4s">We\'re delighted that you enjoy using our app</string>
     <string name="content_rate_5s">We are thrilled to hear that you love our app.</string>
+    <string name="thanks_for_your_rating">Thanks for your rating!</string>
+    <string name="tt_label_ok">OK</string>
 </resources>
