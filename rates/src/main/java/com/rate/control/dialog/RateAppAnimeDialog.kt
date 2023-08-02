@@ -20,7 +20,7 @@ class RateAppAnimeDialog(
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
 ) {
-    var ratingCount = 5f
+    private var ratingCount = 5f
     private lateinit var binding: DialogRateAppAnimeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

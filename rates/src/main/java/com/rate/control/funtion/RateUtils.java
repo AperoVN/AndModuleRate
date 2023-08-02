@@ -9,6 +9,7 @@ import com.rate.control.R;
 import com.rate.control.RatingScriptListener;
 import com.rate.control.dialog.CustomRateAppDialog;
 import com.rate.control.dialog.RateApp2Dialog;
+import com.rate.control.dialog.RateAppAnimeDialog;
 import com.rate.control.dialog.RateAppBlueDialog;
 import com.rate.control.dialog.RateAppDialog;
 import com.rate.control.dialog.RateAppEmojiDialog;
@@ -68,6 +69,11 @@ public class RateUtils {
     public static void showRatingScript(Context context, RatingScriptListener listener, String appName) {
         RatingScriptDialog dialog = new RatingScriptDialog(context, appName);
         dialog.addRatingScriptListener(listener);
+        dialog.show();
+    }
+
+    public static void showRatingAnime(Context context, CallbackListener callbackListener) {
+        RateAppAnimeDialog dialog = new RateAppAnimeDialog(context, callbackListener);
         dialog.show();
     }
 }
