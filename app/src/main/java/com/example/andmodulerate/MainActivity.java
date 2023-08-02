@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.rate.control.CallbackListener;
 import com.rate.control.OnCallback;
 import com.rate.control.RatingScriptListener;
+import com.rate.control.dialog.RateAppAnimeDialog;
 import com.rate.control.dialog.RatingScriptDialog;
 import com.rate.control.funtion.RateUtils;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.forceShowRate).setOnClickListener(v -> RateUtils.showRateEmojiDialog(MainActivity.this, new CallbackListener() {
+        findViewById(R.id.forceShowRate).setOnClickListener(v -> new RateAppAnimeDialog(MainActivity.this, new CallbackListener() {
             @Override
             public void onMaybeLater() {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Maybe later", Toast.LENGTH_SHORT).show());
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRating(float rating, String feedback) {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
             }
-        }));
+        }).show());
     }
 
     @Override
