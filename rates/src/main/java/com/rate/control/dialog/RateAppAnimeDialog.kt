@@ -2,6 +2,7 @@ package com.rate.control.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,16 +14,20 @@ import com.rate.control.CallbackListener
 
 import com.rate.control.R
 import com.rate.control.databinding.DialogRateAppAnimeBinding
+import java.util.Locale
 
 class RateAppAnimeDialog(
     private var mContext: Context,
+    private var languageCode: String = "",
     private var callbackListener: CallbackListener
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
 ) {
     private var ratingCount = 5f
     private lateinit var binding: DialogRateAppAnimeBinding
+    private var myLocale: Locale? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadLocale(language = languageCode)
         super.onCreate(savedInstanceState)
         binding = DialogRateAppAnimeBinding.inflate(LayoutInflater.from(mContext))
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -82,5 +87,27 @@ class RateAppAnimeDialog(
                 binding.txtContent.text = context.getString(R.string.content_rate_5s)
             }
         }
+    }
+
+    private fun loadLocale(language: String = "") {
+        if (language == "") {
+            val config = Configuration()
+            val locale = Locale.getDefault()
+            Locale.setDefault(locale)
+            config.locale = locale
+            context.resources
+                .updateConfiguration(config, context.resources.displayMetrics)
+        } else {
+            changeLang(language, context)
+        }
+    }
+
+    private fun changeLang(lang: String, context: Context) {
+        if (lang.equals("", ignoreCase = true)) return
+        myLocale = Locale(lang)
+        myLocale?.let { Locale.setDefault(it) }
+        val config = Configuration()
+        config.locale = myLocale
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 }
