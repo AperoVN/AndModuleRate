@@ -94,6 +94,7 @@
             android:paddingHorizontal="@dimen/_16sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:text="@string/rate_us"
+            android:textAllCaps="false"
             android:textColor="@color/rate_button_text"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"

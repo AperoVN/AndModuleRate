@@ -32,10 +32,10 @@
             android:layout_height="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/bg_border_8dp"
+            android:gravity="top"
+            android:hint="@string/please_feedback"
             android:padding="@dimen/_10sdp"
             android:textFontWeight="400"
-            android:hint="@string/please_feedback"
-            android:gravity="top"
             app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -46,14 +46,15 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/bg_full_12dp"
             android:backgroundTint="@color/rate_button"
+            android:enabled="false"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_16sdp"
             android:paddingVertical="@dimen/_8sdp"
             android:text="@string/submit"
+            android:textAllCaps="false"
             android:textColor="@color/rate_button_text"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
-            android:enabled="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edtFeedback" />
