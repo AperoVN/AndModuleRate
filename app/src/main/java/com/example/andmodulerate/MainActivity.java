@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRating(float rating, String feedback) {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
             }
-        });
+        }, true);
 
 //        RateUtils.showRatingScript(
 //                this,

@@ -9,6 +9,7 @@ class RateSmileDialog(
     context: Context,
     private val callbackListener: CallbackListener,
     private val goodRating: Float = 4f,
+    private val showFeedback : Boolean
 ) :
     BaseDialog<DialogWithSmileBinding>(context) {
     override fun createBinding(): DialogWithSmileBinding {
@@ -24,13 +25,15 @@ class RateSmileDialog(
                     dismiss()
                 } else {
                     dismiss()
-                    val dialogFeedback =
-                        FeedbackDialog(
-                            context,
-                            binding.rating.rating,
-                            callbackListener = callbackListener
-                        )
-                    dialogFeedback.show()
+                    if(showFeedback){
+                        val dialogFeedback =
+                            FeedbackDialog(
+                                context,
+                                binding.rating.rating,
+                                callbackListener = callbackListener
+                            )
+                        dialogFeedback.show()
+                    }
                 }
             }
         }
