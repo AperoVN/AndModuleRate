@@ -42,43 +42,43 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        RateUtils.showRateEmojiDialog(this, new CallbackListener() {
-//            @Override
-//            public void onMaybeLater() {
-//                finish();
-//            }
+        RateUtils.showRatingSmile(this, new CallbackListener() {
+            @Override
+            public void onMaybeLater() {
+                finish();
+            }
+
+            @Override
+            public void onRating(float rating, String feedback) {
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+            }
+        });
+
+//        RateUtils.showRatingScript(
+//                this,
+//                new RatingScriptListener() {
+//                    @Override
+//                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<com.google.android.play.core.review.ReviewInfo> task) {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(getBaseContext(), getString(R.string.thanks_feedback), Toast.LENGTH_LONG).show();
+//                        } else {
+//                            Toast.makeText(getBaseContext(), "Rate error", Toast.LENGTH_LONG).show();
+//                        }
+//                        MainActivity.super.onBackPressed();
+//                    }
 //
-//            @Override
-//            public void onRating(float rating, String feedback) {
-//                runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
-//            }
-//        });
-
-        RateUtils.showRatingScript(
-                this,
-                new RatingScriptListener() {
-                    @Override
-                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<com.google.android.play.core.review.ReviewInfo> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getBaseContext(), getString(R.string.thanks_feedback), Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getBaseContext(), "Rate error", Toast.LENGTH_LONG).show();
-                        }
-                        MainActivity.super.onBackPressed();
-                    }
-
-                    @Override
-                    public void onResultRated(int ratedLevel) {
-                        Toast.makeText(getBaseContext(), "Rated " + ratedLevel + " star", Toast.LENGTH_LONG).show();
-                        MainActivity.super.onBackPressed();
-                    }
-
-                    @Override
-                    public void onExit() {
-                        MainActivity.super.onBackPressed();
-                    }
-                },
-                getString(R.string.app_name)
-        );
+//                    @Override
+//                    public void onResultRated(int ratedLevel) {
+//                        Toast.makeText(getBaseContext(), "Rated " + ratedLevel + " star", Toast.LENGTH_LONG).show();
+//                        MainActivity.super.onBackPressed();
+//                    }
+//
+//                    @Override
+//                    public void onExit() {
+//                        MainActivity.super.onBackPressed();
+//                    }
+//                },
+//                getString(R.string.app_name)
+//        );
     }
 }

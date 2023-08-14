@@ -8,12 +8,14 @@ import com.rate.control.OnCallback;
 import com.rate.control.R;
 import com.rate.control.RatingScriptListener;
 import com.rate.control.dialog.CustomRateAppDialog;
+import com.rate.control.dialog.FeedbackDialog;
 import com.rate.control.dialog.RateApp2Dialog;
 import com.rate.control.dialog.RateAppAnimeDialog;
 import com.rate.control.dialog.RateAppBlueDialog;
 import com.rate.control.dialog.RateAppDialog;
 import com.rate.control.dialog.RateAppEmojiDialog;
 import com.rate.control.dialog.RateAppWithReason;
+import com.rate.control.dialog.RateSmileDialog;
 import com.rate.control.dialog.RatingScriptDialog;
 
 
@@ -74,6 +76,11 @@ public class RateUtils {
 
     public static void showRatingAnime(Context context, CallbackListener callbackListener) {
         RateAppAnimeDialog dialog = new RateAppAnimeDialog(context, "en", callbackListener);
+        dialog.show();
+    }
+
+    public static void showRatingSmile(Context context, CallbackListener callbackListener) {
+        RateSmileDialog dialog = new RateSmileDialog(context, callbackListener, 4f);
         dialog.show();
     }
 }
