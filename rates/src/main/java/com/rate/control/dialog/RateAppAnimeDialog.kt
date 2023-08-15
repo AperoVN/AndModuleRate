@@ -44,7 +44,8 @@ class RateAppAnimeDialog(
 
     private fun initView() {
         setCancelable(false)
-        binding.rating.rating = defaultRateCount
+        ratingCount = defaultRateCount
+        binding.rating.rating = ratingCount
         binding.btnRate.setOnClickListener {
             if (ratingCount > 0) {
                 callbackListener.onRating(ratingCount, "")
