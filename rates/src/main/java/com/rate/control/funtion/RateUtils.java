@@ -74,11 +74,6 @@ public class RateUtils {
         dialog.show();
     }
 
-    public static void showRatingAnime(Context context, CallbackListener callbackListener) {
-        RateAppAnimeDialog dialog = new RateAppAnimeDialog(context, "en", callbackListener);
-        dialog.show();
-    }
-
     public static void showRatingSmile(Context context, CallbackListener callbackListener,Boolean showFeedback) {
         RateSmileDialog dialog = new RateSmileDialog(context, callbackListener, 4f,showFeedback);
         dialog.show();
