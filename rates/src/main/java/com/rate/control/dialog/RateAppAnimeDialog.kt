@@ -23,7 +23,7 @@ class RateAppAnimeDialog(
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
 ) {
-    private var defaultRateCount = 0f
+    private var ratingCount = 0f
     private lateinit var binding: DialogRateAppAnimeBinding
     private var myLocale: Locale? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,16 +43,17 @@ class RateAppAnimeDialog(
 
     private fun initView() {
         setCancelable(false)
+        binding.rating.rating = ratingCount
         binding.btnRate.setOnClickListener {
-            if (defaultRateCount > 0) {
-                callbackListener.onRating(defaultRateCount, "")
+            if (ratingCount > 0) {
+                callbackListener.onRating(ratingCount, "")
                 dismiss()
             }
         }
         updateEmojiStatus(binding.rating.rating.toInt())
         binding.rating.setOnRatingChangedListener { _, position ->
-            defaultRateCount = position
-            updateEmojiStatus(defaultRateCount.toInt())
+            ratingCount = position
+            updateEmojiStatus(ratingCount.toInt())
         }
         binding.btnClose.setOnClickListener {
             callbackListener.onMaybeLater()
@@ -116,12 +117,7 @@ class RateAppAnimeDialog(
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
-    private fun setDefaultRateCount(rateCount: Float){
-        this.defaultRateCount = rateCount
-        binding.rating.setRating(defaultRateCount)
-    }
-
-    private fun getDefaultRateCount(): Float {
-        return defaultRateCount
+    private fun setDefaultRateCount(rateCount: Float) {
+        binding.rating.rating = rateCount
     }
 }
