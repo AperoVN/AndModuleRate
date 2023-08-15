@@ -23,7 +23,7 @@ class RateAppAnimeDialog(
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
 ) {
-    private var ratingCount = 5f
+    private var defaultRateCount = 0f
     private lateinit var binding: DialogRateAppAnimeBinding
     private var myLocale: Locale? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,15 +44,15 @@ class RateAppAnimeDialog(
     private fun initView() {
         setCancelable(false)
         binding.btnRate.setOnClickListener {
-            if (ratingCount > 0) {
-                callbackListener.onRating(ratingCount, "")
+            if (defaultRateCount > 0) {
+                callbackListener.onRating(defaultRateCount, "")
                 dismiss()
             }
         }
         updateEmojiStatus(binding.rating.rating.toInt())
         binding.rating.setOnRatingChangedListener { _, position ->
-            ratingCount = position
-            updateEmojiStatus(ratingCount.toInt())
+            defaultRateCount = position
+            updateEmojiStatus(defaultRateCount.toInt())
         }
         binding.btnClose.setOnClickListener {
             callbackListener.onMaybeLater()
@@ -62,6 +62,11 @@ class RateAppAnimeDialog(
 
     private fun updateEmojiStatus(stars: Int) {
         when (stars) {
+            0 -> {
+                binding.imgSmile.setImageResource(R.drawable.img_rate_0s)
+                binding.txtContent.text = context.getString(R.string.content_rate_0s)
+            }
+
             1 -> {
                 binding.imgSmile.setImageResource(R.drawable.img_rate_1s)
                 binding.txtContent.text = context.getString(R.string.content_rate_1s)
@@ -109,5 +114,14 @@ class RateAppAnimeDialog(
         val config = Configuration()
         config.locale = myLocale
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    }
+
+    private fun setDefaultRateCount(rateCount: Float){
+        this.defaultRateCount = rateCount
+        binding.rating.setRating(defaultRateCount)
+    }
+
+    private fun getDefaultRateCount(): Float {
+        return defaultRateCount
     }
 }
