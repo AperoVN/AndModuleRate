@@ -19,6 +19,7 @@ import java.util.Locale
 class RateAppAnimeDialog(
     private var mContext: Context,
     private var languageCode: String = "",
+    private val defaultRateCount: Float = 0f,
     private var callbackListener: CallbackListener
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
@@ -43,7 +44,7 @@ class RateAppAnimeDialog(
 
     private fun initView() {
         setCancelable(false)
-        binding.rating.rating = ratingCount
+        binding.rating.rating = defaultRateCount
         binding.btnRate.setOnClickListener {
             if (ratingCount > 0) {
                 callbackListener.onRating(ratingCount, "")
@@ -115,9 +116,5 @@ class RateAppAnimeDialog(
         val config = Configuration()
         config.locale = myLocale
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-
-    private fun setDefaultRateCount(rateCount: Float) {
-        binding.rating.rating = rateCount
     }
 }
