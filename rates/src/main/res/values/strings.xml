@@ -39,6 +39,7 @@
     <string name="rate_start_event">rate_star_%1$s</string>
     <string name="cancel">Cancel</string>
 
+    <string name="content_rate_0s">Please rate us to enhance your experience. Thank you!</string>
     <string name="content_rate_1s">We value your feedback.</string>
     <string name="content_rate_2s">We\'ll improve your experience</string>
     <string name="content_rate_3s">We\'re committed to making it even better.</string>

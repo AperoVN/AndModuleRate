@@ -19,11 +19,12 @@ import java.util.Locale
 class RateAppAnimeDialog(
     private var mContext: Context,
     private var languageCode: String = "",
+    private val defaultRateCount: Float = 0f,
     private var callbackListener: CallbackListener
 ) : Dialog(
     mContext, R.style.DialogAnimeTheme
 ) {
-    private var ratingCount = 5f
+    private var ratingCount = 0f
     private lateinit var binding: DialogRateAppAnimeBinding
     private var myLocale: Locale? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +44,8 @@ class RateAppAnimeDialog(
 
     private fun initView() {
         setCancelable(false)
+        ratingCount = defaultRateCount
+        binding.rating.rating = ratingCount
         binding.btnRate.setOnClickListener {
             if (ratingCount > 0) {
                 callbackListener.onRating(ratingCount, "")
@@ -62,6 +65,11 @@ class RateAppAnimeDialog(
 
     private fun updateEmojiStatus(stars: Int) {
         when (stars) {
+            0 -> {
+                binding.imgSmile.setImageResource(R.drawable.img_rate_0s)
+                binding.txtContent.text = context.getString(R.string.content_rate_0s)
+            }
+
             1 -> {
                 binding.imgSmile.setImageResource(R.drawable.img_rate_1s)
                 binding.txtContent.text = context.getString(R.string.content_rate_1s)
