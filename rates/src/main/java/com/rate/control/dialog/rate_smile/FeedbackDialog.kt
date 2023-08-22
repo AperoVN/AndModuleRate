@@ -1,4 +1,4 @@
-package com.rate.control.dialog
+package com.rate.control.dialog.rate_smile
 
 import android.content.Context
 import android.text.Editable
@@ -7,6 +7,7 @@ import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
 import com.rate.control.CallbackListener
 import com.rate.control.databinding.DialogFeedbackBinding
+import com.rate.control.dialog.BaseDialog
 
 class FeedbackDialog(
     context: Context,

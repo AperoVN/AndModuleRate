@@ -16,8 +16,7 @@
     <color name="raisin_black">#FF222222</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
-
-
+    
     <color name="colorMainRate">#B4FF64</color>
     <color name="colorPrimaryRate">#77FFE2</color>
     <color name="colorAccentRate">#ECFFD8</color>
@@ -26,4 +25,14 @@
     <color name="rate_best_way">#00B2FF</color>
     <color name="rate_button">#F00000</color>
     <color name="rate_button_text">#FFFFFF</color>
+    
+    <color name="feedback_bg_color">#F0F2FF</color>
+    <color name="feedback_title_color">#3B385E</color>
+    <color name="feedback_hint_color">#59000000</color>
+    <color name="feedback_submit_color">#FFFFFF</color>
+    <color name="feedback_submit_bg_color">#F00000</color>
+    <color name="feedback_submit_bg_disable_color">#F78080</color>
+    <color name="feedback_option_bg_color">#EDECE9</color>
+    <color name="feedback_option_bg_selected_color">#1976D2</color>
+    <color name="feedback_option_color">#3B385E</color>
 </resources>
