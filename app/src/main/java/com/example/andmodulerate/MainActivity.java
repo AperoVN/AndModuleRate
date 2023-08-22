@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
             }
         }).show());
-        initRateSmile();
         checkPermission();
     }
 
@@ -63,17 +63,35 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void initRateSmile() {
+
+    @Override
+    public void onBackPressed() {
         dialog = new RateSmileDialog(
                 this,
                 new RateCallBack() {
                     @Override
-                    public void onFeedback(float rating, @NonNull String feedback, @NonNull List<String> tags) {
+                    public void onFeedback(float rating, @NonNull String feedback, @NonNull List<String> options, @Nullable List<String> images) {
                         StringBuilder text = new StringBuilder();
-                        for (String tag : tags) {
+                        for (String tag : options) {
                             text.append(" ").append(tag);
                         }
-                        runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " tag: " + text + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+                        int size = 0;
+                        if (images != null) {
+                            size = images.size();
+                        }
+                        int finalSize = size;
+                        runOnUiThread(() -> Toast.makeText(MainActivity.this,
+                                "rate: " + rating + " tag: " + text + " image size: " + finalSize + " feedback: " + feedback,
+                                Toast.LENGTH_SHORT).show()
+                        );
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test.pro.apero@gmail.com"});
+                        i.putExtra(Intent.EXTRA_SUBJECT,"App name + Feedback");
+                        if (images != null) {
+                            i.putExtra(Intent.EXTRA_STREAM, Uri.parse(images.get(0)));
+                        }
+                        i.setType("image/png");
+                        startActivity(Intent.createChooser(i,"Share you on the jobing"));
                     }
 
                     @Override
@@ -94,12 +112,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.setAction(Intent.ACTION_PICK);
                     startActivityForResult(intent, 100);
                     return null;
-                }
+                },
+                null
         );
-    }
-
-    @Override
-    public void onBackPressed() {
         dialog.show();
     }
 

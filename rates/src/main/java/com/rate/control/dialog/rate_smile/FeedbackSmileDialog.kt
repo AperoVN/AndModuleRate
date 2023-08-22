@@ -8,13 +8,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import com.google.firebase.database.FirebaseDatabase
 import com.rate.control.R
 import com.rate.control.databinding.DialogFeedbackSmileBinding
 import com.rate.control.dialog.rate_smile.adapter.ImageAdapter
@@ -22,15 +20,14 @@ import com.rate.control.dialog.rate_smile.adapter.OptionsAdapter
 
 class FeedbackSmileDialog(
     private val context: Context,
+    private val options: List<String>,
     private val onClose: () -> Unit,
-    private val onSubmit: (List<String>, String) -> Unit,
+    private val onSubmit: (List<String>, List<String>?, String) -> Unit,
     private val onUpload: () -> Unit,
 ) : Dialog(context, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen) {
     private lateinit var binding: DialogFeedbackSmileBinding
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var optionsAdapter: OptionsAdapter
-    private val optionsDefault = mutableListOf("Crashes & Bugs", "Suggestions", "Other")
-    private val options by lazy { optionsDefault }
     private var listOptionSelected = mutableListOf<String>()
     private var textFeedback = ""
     private var minTextFeedback = 6
@@ -61,14 +58,25 @@ class FeedbackSmileDialog(
             listOptionSelected = it.toMutableList()
             checkEnableSubmit()
         }
-        optionsAdapter.updateData(options)
+        optionsAdapter.updateData(options.toMutableList())
         binding.rvOptions.apply {
             adapter = optionsAdapter
         }
     }
 
     private fun initMedia() {
-        imageAdapter = ImageAdapter { onUpload() }
+        imageAdapter = ImageAdapter(
+            onAddClick = {
+                onUpload()
+            },
+            onRemoveLast = {
+                Handler(context.mainLooper).postDelayed({
+                    binding.rvMedia.visibility = View.GONE
+                    binding.txtUpload.visibility = View.VISIBLE
+                }, 50)
+
+            }
+        )
         binding.rvMedia.apply {
             adapter = imageAdapter
         }
@@ -117,19 +125,10 @@ class FeedbackSmileDialog(
         }
 
         binding.txtSubmit.setOnClickListener {
-            try {
-                FirebaseDatabase.getInstance().getReference("feedbacks").push()
-                    .setValue(binding.edtFeedback.text.toString().trim())
-            } catch (e: IllegalStateException) {
-                Log.d("Feedback", "Firebase not init")
-            }
-            onSubmit(listOptionSelected, textFeedback)
+            val result = imageAdapter.getData()
+            onSubmit(listOptionSelected, result, textFeedback)
             dismiss()
         }
-    }
-
-    fun setOptions(data: MutableList<String>) {
-        optionsAdapter.updateData(data)
     }
 
     fun addMedia(uris: MutableList<String>) {

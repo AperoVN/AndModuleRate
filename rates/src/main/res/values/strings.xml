@@ -54,4 +54,7 @@
     <string name="feedback_hint">Enter your feedback here! (min 6 characters)</string>
     <string name="feedback_submit">SUBMIT</string>
     <string name="feedback_upload">Upload photos</string>
+    <string name="feedback_default_option1">Crashes &amp; Bugs</string>
+    <string name="feedback_default_option2">Suggestions</string>
+    <string name="feedback_default_option3">Other</string>
 </resources>

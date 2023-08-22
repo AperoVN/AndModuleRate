@@ -3,8 +3,6 @@ package com.rate.control.dialog.rate_smile
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import com.google.firebase.database.FirebaseDatabase
 import com.rate.control.CallbackListener
 import com.rate.control.databinding.DialogFeedbackBinding
 import com.rate.control.dialog.BaseDialog
@@ -37,12 +35,6 @@ class FeedbackDialog(
             dismiss()
         }
         binding.btnSubmit.setOnClickListener {
-            try {
-                FirebaseDatabase.getInstance().getReference("feedbacks").push()
-                    .setValue(binding.edtFeedback.text.toString().trim())
-            } catch (e: IllegalStateException) {
-                Log.d("Feedback", "Firebase not init")
-            }
             callbackListener.onRating(rate, binding.edtFeedback.text.toString())
             dismiss()
         }

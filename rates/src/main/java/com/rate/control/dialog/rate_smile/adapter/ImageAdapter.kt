@@ -9,6 +9,7 @@ import com.rate.control.databinding.ItemImageBinding
 
 class ImageAdapter(
     private val onAddClick: () -> Unit,
+    private val onRemoveLast: () -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_IMAGE = 0
@@ -20,6 +21,15 @@ class ImageAdapter(
         val index = list.size - 1
         list.addAll(list.size - 1, data)
         notifyItemRangeInserted(index, data.size)
+    }
+
+    fun getData(): MutableList<String>? {
+        if (list.size == 1) {
+            return null
+        }
+        val result = list
+        result.removeLast()
+        return result
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -60,6 +70,9 @@ class ImageAdapter(
             binding.imgRemoveMedia.setOnClickListener {
                 list.remove(item)
                 notifyItemRemoved(position)
+                if (list.size == 1) {
+                    onRemoveLast()
+                }
             }
         }
     }
