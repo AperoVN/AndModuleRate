@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp">
+
+        <ImageView
+            android:id="@+id/imgMedia"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imgRemoveMedia"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:contentDescription="@null"
+            android:elevation="2dp"
+            android:src="@drawable/rate_ic_remove_image"
+            app:layout_constraintBottom_toTopOf="@id/imgMedia"
+            app:layout_constraintEnd_toEndOf="@id/imgMedia"
+            app:layout_constraintStart_toEndOf="@id/imgMedia"
+            app:layout_constraintTop_toTopOf="@id/imgMedia" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
