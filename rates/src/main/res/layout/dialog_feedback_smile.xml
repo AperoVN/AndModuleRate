@@ -136,8 +136,11 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/rate_ic_add_media"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/inter_bold"
                     android:gravity="center_vertical"
                     android:text="@string/rate_feedback_upload"
+                    android:textColor="@color/rate_feedback_upload_color"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="UseCompatTextViewDrawableXml" />
