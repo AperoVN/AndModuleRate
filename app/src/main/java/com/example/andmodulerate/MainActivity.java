@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.rate.control.CallbackListener;
 import com.rate.control.dialog.RateAppAnimeDialog;
@@ -22,6 +23,7 @@ import com.rate.control.dialog.RateFeedbackDialog;
 import com.rate.control.dialog.rate_smile.RateCallBack;
 import com.rate.control.dialog.rate_smile.RateSmileDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private void checkPermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
             }
         } else {
             if (ContextCompat.checkSelfPermission(this,
@@ -88,10 +90,15 @@ public class MainActivity extends AppCompatActivity {
                         i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test.pro.apero@gmail.com"});
                         i.putExtra(Intent.EXTRA_SUBJECT,"App name + Feedback");
                         if (images != null) {
-                            i.putExtra(Intent.EXTRA_STREAM, Uri.parse(images.get(0)));
+                            Uri uri = FileProvider.getUriForFile(
+                                    MainActivity.this,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    new File(images.get(0))
+                            );
+                            i.putExtra(Intent.EXTRA_STREAM, uri);
                         }
-                        i.setType("image/png");
-                        startActivity(Intent.createChooser(i,"Share you on the jobing"));
+                        i.setType("image/*");
+                        startActivity(Intent.createChooser(i,"Share via"));
                     }
 
                     @Override
