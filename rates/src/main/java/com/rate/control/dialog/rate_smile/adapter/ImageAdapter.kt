@@ -11,10 +11,12 @@ class ImageAdapter(
     private val onAddClick: () -> Unit,
     private val onRemoveLast: () -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
+        private const val TYPE_IMAGE = 0
+        private const val TYPE_ADD = 1
+        private const val ADD = "add"
+    }
 
-    private val TYPE_IMAGE = 0
-    private val TYPE_ADD = 1
-    private val ADD = "add"
     private val list = mutableListOf(ADD)
 
     fun updateData(data: MutableList<String>) {

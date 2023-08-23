@@ -7,8 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/bg_feedback_text_options"
-        android:textColor="@color/feedback_option_color"
+        android:background="@drawable/rate_bg_feedback_text_options"
+        android:textColor="@color/rate_feedback_option_color"
         android:paddingHorizontal="@dimen/_9sdp"
         android:paddingVertical="@dimen/_6sdp"
         tools:text="Crashes &amp; Bugs" />

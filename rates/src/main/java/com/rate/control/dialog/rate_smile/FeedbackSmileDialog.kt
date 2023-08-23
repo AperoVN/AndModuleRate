@@ -86,11 +86,11 @@ class FeedbackSmileDialog(
         if (listOptionSelected.size > 0 && textFeedback.length >= minTextFeedback) {
             binding.txtSubmit.isEnabled = true
             binding.txtSubmit.backgroundTintList =
-                ContextCompat.getColorStateList(context, R.color.feedback_submit_bg_color)
+                ContextCompat.getColorStateList(context, R.color.rate_feedback_submit_bg_color)
         } else {
             binding.txtSubmit.isEnabled = false
             binding.txtSubmit.backgroundTintList =
-                ContextCompat.getColorStateList(context, R.color.feedback_submit_bg_disable_color)
+                ContextCompat.getColorStateList(context, R.color.rate_feedback_submit_bg_disable_color)
         }
     }
 

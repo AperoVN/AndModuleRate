@@ -25,7 +25,7 @@
             android:layout_height="@dimen/_20sdp"
             android:contentDescription="@null"
             android:elevation="2dp"
-            android:src="@drawable/ic_remove_image"
+            android:src="@drawable/rate_ic_remove_image"
             app:layout_constraintBottom_toTopOf="@id/imgMedia"
             app:layout_constraintEnd_toEndOf="@id/imgMedia"
             app:layout_constraintStart_toEndOf="@id/imgMedia"

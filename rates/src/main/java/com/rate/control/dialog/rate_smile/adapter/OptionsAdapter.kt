@@ -55,9 +55,9 @@ class OptionsAdapter(
                 onItemClick(getListOptionSelected())
             }
             binding.txtOptions.backgroundTintList = if (item.isSelected) {
-                ContextCompat.getColorStateList(context, R.color.feedback_option_bg_selected_color)
+                ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_selected_color)
             } else {
-                ContextCompat.getColorStateList(context, R.color.feedback_option_bg_color)
+                ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_color)
             }
         }
     }

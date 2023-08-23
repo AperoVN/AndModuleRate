@@ -65,9 +65,9 @@ class RateSmileDialog(
     private fun initFeedbackDialog() {
         if (isShowFeedback) {
             val tags = options ?: mutableListOf(
-                context.getString(R.string.feedback_default_option1),
-                context.getString(R.string.feedback_default_option2),
-                context.getString(R.string.feedback_default_option3),
+                context.getString(R.string.rate_feedback_default_option1),
+                context.getString(R.string.rate_feedback_default_option2),
+                context.getString(R.string.rate_feedback_default_option3),
             )
             feedbackSmileDialog = FeedbackSmileDialog(
                 context = context,
