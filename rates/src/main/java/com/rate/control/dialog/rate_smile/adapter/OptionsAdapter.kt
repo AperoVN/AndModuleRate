@@ -54,10 +54,12 @@ class OptionsAdapter(
                 notifyItemChanged(adapterPosition)
                 onItemClick(getListOptionSelected())
             }
-            binding.txtOptions.backgroundTintList = if (item.isSelected) {
-                ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_selected_color)
+            if (item.isSelected) {
+                binding.txtOptions.setTextColor(ContextCompat.getColorStateList(context, R.color.rate_feedback_option_selected_color))
+                binding.txtOptions.backgroundTintList = ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_selected_color)
             } else {
-                ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_color)
+                binding.txtOptions.setTextColor(ContextCompat.getColorStateList(context, R.color.rate_feedback_option_color))
+                binding.txtOptions.backgroundTintList = ContextCompat.getColorStateList(context, R.color.rate_feedback_option_bg_color)
             }
         }
     }

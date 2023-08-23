@@ -107,6 +107,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:paddingHorizontal="0dp"
+                android:textColor="@color/rate_feedback_input_text_color"
                 android:textColorHint="@color/rate_feedback_hint_color"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/ctlMedia"

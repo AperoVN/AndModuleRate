@@ -35,4 +35,6 @@
     <color name="rate_feedback_option_bg_color">#EDECE9</color>
     <color name="rate_feedback_option_bg_selected_color">#1976D2</color>
     <color name="rate_feedback_option_color">#3B385E</color>
+    <color name="rate_feedback_option_selected_color">#FFFFFF</color>
+    <color name="rate_feedback_input_text_color">#3B385E</color>
 </resources>
