@@ -34,6 +34,10 @@ class ImageAdapter(
         return result
     }
 
+    fun getSize(): Int {
+        return list.size
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_IMAGE) {
             ImageViewHolder(
@@ -48,7 +52,7 @@ class ImageAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ImageViewHolder) {
-            holder.bindView(list[position], position)
+            holder.bindView(list[position])
         } else if (holder is AddViewHolder) {
             holder.bindView()
         }
@@ -66,12 +70,11 @@ class ImageAdapter(
 
     inner class ImageViewHolder(private val binding: ItemImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: String, position: Int) {
+        fun bindView(item: String) {
             binding.imgMedia.setImageURI(Uri.parse(item))
-
             binding.imgRemoveMedia.setOnClickListener {
                 list.remove(item)
-                notifyItemRemoved(position)
+                notifyItemRemoved(adapterPosition)
                 if (list.size == 1) {
                     onRemoveLast()
                 }
@@ -83,9 +86,7 @@ class ImageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindView() {
-            binding.imgAdd.setOnClickListener {
-                onAddClick()
-            }
+            binding.imgAdd.setOnClickListener { onAddClick() }
         }
     }
 }

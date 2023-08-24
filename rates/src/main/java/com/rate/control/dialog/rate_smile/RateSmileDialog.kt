@@ -9,40 +9,22 @@ class RateSmileDialog(
     context: Context,
     private val rateCallBack: RateCallBack,
     private val goodRating: Float = 4f,
-    private val isShowFeedback: Boolean,
-    private val onUploadMedia: () -> Unit,
-    private val options: MutableList<String>? = null,
 ) : BaseDialog<DialogWithSmileBinding>(context) {
 
-    lateinit var feedbackSmileDialog: FeedbackSmileDialog
     override fun createBinding(): DialogWithSmileBinding {
         return DialogWithSmileBinding.inflate(layoutInflater)
     }
 
-    fun addMedia(uris: MutableList<String>) {
-        feedbackSmileDialog.addMedia(uris)
-    }
-
     override fun initViews() {
         setCancelable(false)
-        initFeedbackDialog()
         binding.btnRate.setOnClickListener {
             if (binding.rating.rating != 0f) {
-                if (binding.rating.rating >= goodRating) {
-                    rateCallBack.onRating(binding.rating.rating, "")
-                    dismiss()
-                } else {
-                    dismiss()
-                    if (isShowFeedback && this::feedbackSmileDialog.isInitialized) {
-                        feedbackSmileDialog.show()
-                    } else {
-                        rateCallBack.onRating(binding.rating.rating, "")
-                    }
-                }
+                rateCallBack.onRating(binding.rating.rating)
+                dismiss()
             }
         }
         binding.btnDismiss.setOnClickListener {
-            rateCallBack.onMaybeLater()
+            rateCallBack.onClose()
             dismiss()
         }
         binding.rating.setOnRatingChangedListener { _, newRating ->
@@ -59,25 +41,6 @@ class RateSmileDialog(
                 binding.tvMessage.setText(R.string.rate_message_bad)
                 binding.btnRate.setText(R.string.rate_us)
             }
-        }
-    }
-
-    private fun initFeedbackDialog() {
-        if (isShowFeedback) {
-            val tags = options ?: mutableListOf(
-                context.getString(R.string.rate_feedback_default_option1),
-                context.getString(R.string.rate_feedback_default_option2),
-                context.getString(R.string.rate_feedback_default_option3),
-            )
-            feedbackSmileDialog = FeedbackSmileDialog(
-                context = context,
-                options = tags,
-                onClose = { rateCallBack.onRating(binding.rating.rating, "") },
-                onSubmit = { options, listImage, feedback ->
-                    rateCallBack.onFeedback(binding.rating.rating, feedback, options, listImage)
-                },
-                onUpload = { onUploadMedia() }
-            )
         }
     }
 }
