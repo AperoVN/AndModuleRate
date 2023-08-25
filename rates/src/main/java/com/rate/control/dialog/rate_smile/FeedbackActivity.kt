@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts.PickMultipleVis
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.rate.control.R
 import com.rate.control.databinding.ActivityFeedbackBinding
@@ -109,7 +110,6 @@ class FeedbackActivity : AppCompatActivity() {
     private fun initListener() {
         binding.txtUpload.setOnClickListener {
             openGallery()
-            showMedia(true)
         }
 
         binding.edtFeedback.addTextChangedListener(object : TextWatcher {
@@ -149,6 +149,9 @@ class FeedbackActivity : AppCompatActivity() {
     }
 
     private fun addMedia(uris: MutableList<String>) {
+        if (binding.rvMedia.isGone) {
+            showMedia(true)
+        }
         imageAdapter.updateData(uris)
         binding.rvMedia.smoothScrollToPosition(binding.rvMedia.adapter?.itemCount?.minus(1) ?: 0)
     }
