@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
         android:layout_width="@dimen/_65sdp"
-        android:layout_height="@dimen/_65sdp">
+        android:layout_height="@dimen/_65sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        tools:ignore="RtlSymmetry">
 
         <ImageView
             android:id="@+id/imgAdd"

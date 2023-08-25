@@ -1,18 +1,20 @@
 package com.example.andmodulerate;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -20,12 +22,12 @@ import androidx.core.content.FileProvider;
 import com.rate.control.CallbackListener;
 import com.rate.control.dialog.RateAppAnimeDialog;
 import com.rate.control.dialog.RateFeedbackDialog;
+import com.rate.control.dialog.rate_smile.FeedbackActivity;
 import com.rate.control.dialog.rate_smile.RateCallBack;
 import com.rate.control.dialog.rate_smile.RateSmileDialog;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RateSmileDialog dialog;
@@ -51,6 +53,42 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
     }
 
+    ActivityResultLauncher<Intent> feedbackLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                Intent intent = result.getData();
+                if (result.getResultCode() == Activity.RESULT_OK && intent != null) {
+                    ArrayList<String> listOption = intent.getStringArrayListExtra(FeedbackActivity.LIST_OPTION);
+                    ArrayList<String> listImage = intent.getStringArrayListExtra(FeedbackActivity.LIST_IMAGE);
+                    String textFeedback = intent.getStringExtra(FeedbackActivity.TEXT_FEEDBACK);
+                    sendEmail(listOption, listImage, textFeedback);
+                } else {
+                    Toast.makeText(this, "Close Feedback", Toast.LENGTH_SHORT).show();
+                }
+            }
+    );
+
+    private void sendEmail(ArrayList<String> options, ArrayList<String> images, String feedback) {
+        StringBuilder text = new StringBuilder();
+        for (String tag : options) {
+            text.append(" ").append(tag);
+        }
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test.pro.apero@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "App name + Feedback");
+        if (images != null && !images.isEmpty()) {
+            ArrayList<Uri> list = new ArrayList<>();
+            for (String path: images) {
+                list.add(Uri.parse(path));
+            }
+            i.putExtra(Intent.EXTRA_STREAM, list);
+        }
+        i.putExtra(Intent.EXTRA_TEXT, feedback);
+        i.setType("*/*");
+        i.setAction(Intent.ACTION_SEND_MULTIPLE);
+        startActivity(Intent.createChooser(i, "Share via"));
+    }
+
     private void checkPermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this,
@@ -65,94 +103,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
-        dialog = new RateSmileDialog(
+        new RateSmileDialog(
                 this,
                 new RateCallBack() {
                     @Override
-                    public void onFeedback(float rating, @NonNull String feedback, @NonNull List<String> options, @Nullable List<String> images) {
-                        StringBuilder text = new StringBuilder();
-                        for (String tag : options) {
-                            text.append(" ").append(tag);
-                        }
-                        int size = 0;
-                        if (images != null) {
-                            size = images.size();
-                        }
-                        int finalSize = size;
-                        runOnUiThread(() -> Toast.makeText(MainActivity.this,
-                                "rate: " + rating + " tag: " + text + " image size: " + finalSize + " feedback: " + feedback,
-                                Toast.LENGTH_SHORT).show()
-                        );
-                        Intent i = new Intent(Intent.ACTION_SEND);
-                        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test.pro.apero@gmail.com"});
-                        i.putExtra(Intent.EXTRA_SUBJECT,"App name + Feedback");
-                        if (images != null) {
-                            Uri uri = FileProvider.getUriForFile(
-                                    MainActivity.this,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    new File(images.get(0))
-                            );
-                            i.putExtra(Intent.EXTRA_STREAM, uri);
-                        }
-                        i.setType("image/*");
-                        startActivity(Intent.createChooser(i,"Share via"));
-                    }
-
-                    @Override
-                    public void onMaybeLater() {
+                    public void onClose() {
                         finish();
                     }
 
                     @Override
-                    public void onRating(float rating, String feedback) {
-                        runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+                    public void onRating(float rating) {
+                        if (rating >= 4) {
+                            runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating, Toast.LENGTH_SHORT).show());
+                        } else {
+                            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+                            feedbackLauncher.launch(intent);
+                        }
                     }
                 },
-                4f,
-                true,
-                () -> {
-                    Intent intent = new Intent();
-                    intent.setType("image/*");
-                    intent.setAction(Intent.ACTION_PICK);
-                    startActivityForResult(intent, 100);
-                    return null;
-                },
-                null
-        );
-        dialog.show();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (data != null) {
-                Uri uri = data.getData();
-                ArrayList<String> list = new ArrayList<>();
-                list.add(getRealPathFromURI(uri));
-                dialog.addMedia(list);
-            }
-        } else {
-            Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public String getRealPathFromURI(Uri contentURI) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(contentURI, projection, null,
-                null, null);
-        if (cursor == null)
-            return null;
-        int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        if (cursor.moveToFirst()) {
-            // cursor.close();
-            return cursor.getString(column_index);
-        }
-        // cursor.close();
-        return null;
+                4f
+        ).show();
     }
 }
