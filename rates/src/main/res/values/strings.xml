@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rate_title">DO YOU LIKE OUR APP?</string>
-    <string name="rate_title_normal">Do you like the app?</string>
-    <string name="rate_message">We’d greatly appreciate if you can rate us</string>
-    <string name="rate_best_way">The best we can get :)</string>
-    <string name="rate_message_good">Thanks for your feedback</string>
-    <string name="rate_message_bad">Please leave us some feedback</string>
-    <string name="rate_on_google_play">Rate on Google Play</string>
     <string name="rate_content">Give us a quick rating so we know if you like it?</string>
     <string name="too_many_ads">Too many ads</string>
     <string name="not_working">Not working</string>
@@ -49,6 +43,12 @@
     <string name="tt_label_ok">OK</string>
     <string name="rate_message_feedback">Let us know your experience and we\'ll try to improve it</string>
 
+    <string name="rate_title_normal">Do you like the app?</string>
+    <string name="rate_message">We’d greatly appreciate if you can rate us</string>
+    <string name="rate_best_way">The best we can get :)</string>
+    <string name="rate_message_good">Thanks for your feedback</string>
+    <string name="rate_message_bad">Please leave us some feedback</string>
+    <string name="rate_on_google_play">Rate on Google Play</string>
     <string name="rate_feedback_title">Send us some feedback!</string>
     <string name="rate_feedback_description">Found a bug? Have a suggestion? Fill out the form below and we’ll take a look!</string>
     <string name="rate_feedback_hint">Enter your feedback here! (min 6 characters)</string>
