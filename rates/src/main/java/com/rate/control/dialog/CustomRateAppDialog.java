@@ -25,6 +25,7 @@ public class CustomRateAppDialog extends Dialog {
     private Thread th;
     CallbackListener callbackListener;
     EditText edtFeedback;
+    TextView txtTitle;
     TextView tv_submit;
     private TextView btnTooAds, btnNotWorking, btnOther;
     private LinearLayout layoutFeedback, layoutActions;
@@ -50,12 +51,15 @@ public class CustomRateAppDialog extends Dialog {
         setCancelable(false);
         RatingBar rating = findViewById(R.id.rating);
         edtFeedback = findViewById(R.id.edtFeedback);
+        txtTitle = findViewById(R.id.txtTitle);
         tv_submit = findViewById(R.id.tv_submit);
         btnTooAds = findViewById(R.id.btn_too_ads);
         btnNotWorking = findViewById(R.id.btn_not_working);
         btnOther = findViewById(R.id.btn_other);
         layoutFeedback = findViewById(R.id.layout_feedback);
         layoutActions = findViewById(R.id.layout_actions);
+
+        txtTitle.setSelected(true);
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

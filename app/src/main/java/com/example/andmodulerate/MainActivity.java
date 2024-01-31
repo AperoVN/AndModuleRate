@@ -7,27 +7,31 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import com.rate.control.CallbackListener;
+import com.rate.control.dialog.CustomRateAppDialog;
+import com.rate.control.dialog.RateApp2Dialog;
 import com.rate.control.dialog.RateAppAnimeDialog;
+import com.rate.control.dialog.RateAppBlueDialog;
+import com.rate.control.dialog.RateAppDialog;
+import com.rate.control.dialog.RateAppEmojiDialog;
+import com.rate.control.dialog.RateAppWithReason;
 import com.rate.control.dialog.RateFeedbackDialog;
+import com.rate.control.dialog.RatingScriptDialog;
 import com.rate.control.dialog.rate_smile.FeedbackActivity;
 import com.rate.control.dialog.rate_smile.RateCallBack;
 import com.rate.control.dialog.rate_smile.RateSmileDialog;
 
-import java.io.File;
 import java.util.ArrayList;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class MainActivity extends AppCompatActivity {
     private RateSmileDialog dialog;
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.forceShowRate).setOnClickListener(v -> new RateAppAnimeDialog(MainActivity.this, "en", 3, new CallbackListener() {
+        findViewById(R.id.btnRateAppAnimeDialog).setOnClickListener(v -> new RateAppAnimeDialog(MainActivity.this, "en", 3, new CallbackListener() {
             @Override
             public void onMaybeLater() {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Maybe later", Toast.LENGTH_SHORT).show());
@@ -50,6 +54,65 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
             }
         }).show());
+
+        findViewById(R.id.btnCustomRateAppDialog).setOnClickListener(v -> new CustomRateAppDialog(MainActivity.this,  new CallbackListener() {
+            @Override
+            public void onMaybeLater() {
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Maybe later", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onRating(float rating, String feedback) {
+                new RateFeedbackDialog(MainActivity.this, " es", () -> {
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+                    return null;
+                }).show();
+            }
+        }).show());
+
+        findViewById(R.id.btnRateApp2Dialog).setOnClickListener(v -> new RateApp2Dialog(MainActivity.this).show());
+
+        findViewById(R.id.btnRateAppBlueDialog).setOnClickListener(v -> new RateAppBlueDialog(MainActivity.this).show());
+
+        findViewById(R.id.btnRateAppDialog).setOnClickListener(v -> new RateAppDialog(MainActivity.this).show());
+
+        findViewById(R.id.btnRateAppEmojiDialog).setOnClickListener(v -> new RateAppEmojiDialog(MainActivity.this, new CallbackListener() {
+            @Override
+            public void onMaybeLater() {
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Maybe later", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onRating(float rating, String feedback) {
+                new RateFeedbackDialog(MainActivity.this, " es", () -> {
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+                    return null;
+                }).show();
+            }
+        }).show());
+
+        findViewById(R.id.btnRateAppWithReason).setOnClickListener(v -> new RateAppWithReason(MainActivity.this, new CallbackListener() {
+            @Override
+            public void onMaybeLater() {
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Maybe later", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onRating(float rating, String feedback) {
+                new RateFeedbackDialog(MainActivity.this, " es", () -> {
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "rate: " + rating + " feedback: " + feedback, Toast.LENGTH_SHORT).show());
+                    return null;
+                }).show();
+            }
+        }).show());
+
+        findViewById(R.id.btnRateFeedbackDialog).setOnClickListener(v -> new RateFeedbackDialog(
+                MainActivity.this,
+                "en",
+                (Function0) () -> Unit.INSTANCE).show());
+
+        findViewById(R.id.btnRatingScriptDialog).setOnClickListener(v -> new RatingScriptDialog(MainActivity.this, getString(R.string.app_name)).show());
+
         checkPermission();
     }
 

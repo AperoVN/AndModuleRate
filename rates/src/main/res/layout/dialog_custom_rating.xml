@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -23,6 +24,8 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
             android:text="@string/rate_title"
             android:textColor="@color/colorText"
             android:textSize="@dimen/_14sdp"
@@ -69,8 +72,9 @@
             android:visibility="gone">
 
             <HorizontalScrollView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scrollbars="none"
                 android:gravity="center_horizontal">
 
                 <LinearLayout
