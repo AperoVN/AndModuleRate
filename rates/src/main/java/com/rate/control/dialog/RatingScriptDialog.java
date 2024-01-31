@@ -25,7 +25,6 @@ import com.rate.control.R;
 import com.rate.control.RatingScriptListener;
 import com.rate.control.SharePreferenceUtils;
 import com.rate.control.databinding.DialogRatingScriptBinding;
-import com.rate.control.event.FirebaseAnalyticsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,7 +167,6 @@ public class RatingScriptDialog extends Dialog implements View.OnClickListener {
             dismiss();
             ratingListener.onResultRated(ratedLevel);
             String rateStarEvent = String.format(getContext().getString(R.string.rate_start_event), String.valueOf(ratedLevel));
-            FirebaseAnalyticsUtil.logClickAdsEvent(context, rateStarEvent);
             if (ratedLevel == 5) {
                 ReviewManager manager = ReviewManagerFactory.create(context);
                 Task<ReviewInfo> request = manager.requestReviewFlow();
